@@ -15,8 +15,8 @@
 # Это повышает производительность при необходимости сразу отображать имена отправителя и получателя.
 
 from __future__ import annotations
-from datetime import datetime
-from sqlalchemy import ForeignKey, DateTime, func, Boolean, String, Text
+from datetime import datetime, timezone
+from sqlalchemy import ForeignKey, DateTime, Boolean, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from models.base import Base
 from models.user import User
@@ -33,7 +33,7 @@ class Post(Base):
     content: Mapped[str] = mapped_column(Text)
     message_type: Mapped[str] = mapped_column(String(20), default="text")  # e.g. text, image, video
     is_read: Mapped[bool] = mapped_column(Boolean, default=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=func.now())
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.now(timezone.utc))
 
     # Efficient relationships with lazy loading, used only when accessed
     sender: Mapped["User"] = relationship(
