@@ -38,7 +38,7 @@ DATABASE_USER=
 
 DATABASE_PASSWORD=
 
-
+# Инструкция по применению .env
 
 В DATABASE_HOST= укажите хост базы. по умолчанию он "localhost"
 
@@ -46,7 +46,7 @@ DATABASE_PASSWORD=
 
 В DATABASE_NAME= укажите название базы.
 
-В DATABASE_USER= укажите имя получателя базы данных.
+В DATABASE_USER= укажите имя пользователя.
 
 В DATABASE_PASSWORD= укажите пароль пользователя.
 
