@@ -12,6 +12,9 @@ class User(Base):
     patronic_name: Mapped[str] = mapped_column(String(50))
     biography: Mapped[str] = mapped_column(Text)
 
+    email: Mapped[str] = mapped_column(String(200))
+    password: Mapped[str] = mapped_column(String(200))
+
     # Friendship relationships - using string references to avoid circular import
     friendships: Mapped[list["Friend"]] = relationship(
         "Friend", foreign_keys="Friend.user_id", back_populates="user"
@@ -19,3 +22,10 @@ class User(Base):
     friends_with: Mapped[list["Friend"]] = relationship(
         "Friend", foreign_keys="Friend.friend_id", back_populates="friend"
     )
+    sent_messages = relationship(
+        "Message", foreign_keys="Message.sender_id", back_populates="sender"
+    )
+    received_messages = relationship(
+        "Message", foreign_keys="Message.receiver_id", back_populates="receiver"
+    )
+    posts = relationship("Post", foreign_keys="Post.author_id", back_populates="author")
