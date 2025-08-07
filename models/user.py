@@ -12,7 +12,7 @@ class User(Base):
     patronic_name: Mapped[str] = mapped_column(String(50))
     biography: Mapped[str] = mapped_column(Text)
 
-    email: Mapped[str] = mapped_column(String(200))
+    email: Mapped[str] = mapped_column(String(200), unique=True)
     password: Mapped[str] = mapped_column(String(200))
 
     # Friendship relationships - using string references to avoid circular import

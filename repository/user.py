@@ -1,4 +1,5 @@
 from models import User
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 
@@ -21,3 +22,14 @@ def add_new_user(
     session.commit()
 
     return user
+
+
+def find_user_by_email(session: Session, email: str) -> User | None:
+    stmt = select(User).where(User.email == email)
+    user = session.scalar(stmt)
+
+    return user
+
+
+def verify_password(session: Session, hash_password: str, password: str) -> bool:
+    return pwd_context.verify(password, hash_password)
